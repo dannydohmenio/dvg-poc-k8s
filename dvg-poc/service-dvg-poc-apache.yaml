@@ -6,9 +6,9 @@ metadata:
   name: dvg-poc-apache
   namespace: default
 spec:
-  clusterIP: 172.20.150.178
+  clusterIP: 172.20.73.222
   clusterIPs:
-    - 172.20.150.178
+    - 172.20.73.222
   externalTrafficPolicy: Cluster
   internalTrafficPolicy: Cluster
   ipFamilies:
