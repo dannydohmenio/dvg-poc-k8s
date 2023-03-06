@@ -2,14 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    deployment.kubernetes.io/revision: "1"
+    deployment.kubernetes.io/revision: '1'
+  creationTimestamp: '2023-03-06T10:34:17Z'
+  generation: 9
   labels:
     app: dvg-poc-apache
+    app.kubernetes.io/instance: dvg-poc
   name: dvg-poc-apache
   namespace: default
+  resourceVersion: '18423'
+  uid: abbbed97-7f2b-4ea0-a658-11c4705d3e21
 spec:
   progressDeadlineSeconds: 600
-  replicas: 2
+  replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -21,38 +26,39 @@ spec:
     type: RollingUpdate
   template:
     metadata:
+      creationTimestamp: null
       labels:
         app: dvg-poc-apache
     spec:
       automountServiceAccountToken: true
       containers:
-      - image: iodenbosch/dvg-poc:1.0.20
-        imagePullPolicy: IfNotPresent
-        name: dvg-poc
-        ports:
-        - containerPort: 22
-          protocol: TCP
-        - containerPort: 80
-          protocol: TCP
-        - containerPort: 443
-          protocol: TCP
-        resources:
-          limits:
-            cpu: 2500m
-            memory: 1536Mi
-          requests:
-            cpu: 150m
-            memory: 768Mi
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-        volumeMounts:
-        - mountPath: /var/www/project/htdocs/sites/default/files/
-          mountPropagation: None
-          name: drupal-files
-        - mountPath: /var/www/project/htdocs/sites/default/settings.db.php
-          mountPropagation: None
-          name: drupal-settings
-          subPath: settings
+        - image: 'iodenbosch/dvg-poc:1.0.20'
+          imagePullPolicy: IfNotPresent
+          name: dvg-poc
+          ports:
+            - containerPort: 22
+              protocol: TCP
+            - containerPort: 80
+              protocol: TCP
+            - containerPort: 443
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 2500m
+              memory: 1536Mi
+            requests:
+              cpu: 150m
+              memory: 768Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /var/www/project/htdocs/sites/default/files/
+              mountPropagation: None
+              name: drupal-files
+            - mountPath: /var/www/project/htdocs/sites/default/settings.db.php
+              mountPropagation: None
+              name: drupal-settings
+              subPath: settings
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
       restartPolicy: Always
@@ -61,11 +67,30 @@ spec:
       shareProcessNamespace: false
       terminationGracePeriodSeconds: 30
       volumes:
-      - name: drupal-files
-        persistentVolumeClaim:
-          claimName: efs-claim
-      - configMap:
-          defaultMode: 420
-          name: dvg-drupal-settings
-          optional: false
-        name: drupal-settings
+        - name: drupal-files
+          persistentVolumeClaim:
+            claimName: efs-claim
+        - configMap:
+            defaultMode: 420
+            name: dvg-drupal-settings
+            optional: false
+          name: drupal-settings
+status:
+  availableReplicas: 1
+  conditions:
+    - lastTransitionTime: '2023-03-06T10:34:17Z'
+      lastUpdateTime: '2023-03-06T10:35:28Z'
+      message: ReplicaSet "dvg-poc-apache-866cff8bbc" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: 'True'
+      type: Progressing
+    - lastTransitionTime: '2023-03-06T12:01:28Z'
+      lastUpdateTime: '2023-03-06T12:01:28Z'
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: 'True'
+      type: Available
+  observedGeneration: 9
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

@@ -2,11 +2,16 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    deployment.kubernetes.io/revision: "1"
+    deployment.kubernetes.io/revision: '2'
+  creationTimestamp: '2023-03-06T10:34:17Z'
+  generation: 5
   labels:
     app: mysql
+    app.kubernetes.io/instance: dvg-poc
   name: mysql
   namespace: default
+  resourceVersion: '18352'
+  uid: fe2a5d0d-4306-4636-8413-4ebe70448a30
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
@@ -18,39 +23,40 @@ spec:
     type: Recreate
   template:
     metadata:
+      creationTimestamp: null
       labels:
         app: mysql
     spec:
       automountServiceAccountToken: true
       containers:
-      - args:
-        - --skip-log-bin
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          value: YTrNSu3OY75mo07m
-        image: mysql:8.0.30-debian
-        imagePullPolicy: IfNotPresent
-        name: mysql
-        ports:
-        - containerPort: 3306
-          protocol: TCP
-        resources:
-          limits:
-            cpu: "1"
-            memory: 1536Mi
-          requests:
-            cpu: 200m
-            memory: 1Gi
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-        volumeMounts:
-        - mountPath: /var/lib/mysql
-          mountPropagation: None
-          name: mysql-files
-        - mountPath: /etc/mysql/conf.d/dvg.cnf
-          mountPropagation: None
-          name: mysql-settings
-          subPath: settings
+        - args:
+            - '--skip-log-bin'
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: YTrNSu3OY75mo07m
+          image: 'mysql:8.0.30-debian'
+          imagePullPolicy: IfNotPresent
+          name: mysql
+          ports:
+            - containerPort: 3306
+              protocol: TCP
+          resources:
+            limits:
+              cpu: '1'
+              memory: 1536Mi
+            requests:
+              cpu: 200m
+              memory: 1Gi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              mountPropagation: None
+              name: mysql-files
+            - mountPath: /etc/mysql/conf.d/dvg.cnf
+              mountPropagation: None
+              name: mysql-settings
+              subPath: settings
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
       restartPolicy: Always
@@ -59,11 +65,30 @@ spec:
       shareProcessNamespace: false
       terminationGracePeriodSeconds: 30
       volumes:
-      - name: mysql-files
-        persistentVolumeClaim:
-          claimName: efs-claim-mysql
-      - configMap:
-          defaultMode: 420
+        - name: mysql-files
+          persistentVolumeClaim:
+            claimName: efs-claim-mysql
+        - configMap:
+            defaultMode: 420
+            name: mysql-settings
+            optional: false
           name: mysql-settings
-          optional: false
-        name: mysql-settings
+status:
+  availableReplicas: 1
+  conditions:
+    - lastTransitionTime: '2023-03-06T11:57:04Z'
+      lastUpdateTime: '2023-03-06T11:57:04Z'
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: 'True'
+      type: Available
+    - lastTransitionTime: '2023-03-06T10:34:17Z'
+      lastUpdateTime: '2023-03-06T11:57:04Z'
+      message: ReplicaSet "mysql-79f65f8995" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: 'True'
+      type: Progressing
+  observedGeneration: 5
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1
