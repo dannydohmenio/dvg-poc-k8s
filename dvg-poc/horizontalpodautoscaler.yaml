@@ -5,11 +5,8 @@ items:
   metadata:
     labels:
       app.kubernetes.io/instance: dvg-poc
-    creationTimestamp: "2023-03-06T10:33:54Z"
     name: autoscaler
     namespace: default
-    resourceVersion: "22324"
-    uid: b791f286-d4ab-4711-a0ca-257c17d8b282
   spec:
     behavior:
       scaleDown:
@@ -39,35 +36,3 @@ items:
       apiVersion: apps/v1
       kind: Deployment
       name: dvg-poc-apache
-  status:
-    conditions:
-    - lastTransitionTime: "2023-03-06T10:34:24Z"
-      message: recent recommendations were higher than current one, applying the highest
-        recent recommendation
-      reason: ScaleDownStabilized
-      status: "True"
-      type: AbleToScale
-    - lastTransitionTime: "2023-03-06T10:35:54Z"
-      message: the HPA was able to successfully calculate a replica count from cpu
-        resource utilization (percentage of request)
-      reason: ValidMetricFound
-      status: "True"
-      type: ScalingActive
-    - lastTransitionTime: "2023-03-06T12:20:27Z"
-      message: the desired replica count is less than the minimum replica count
-      reason: TooFewReplicas
-      status: "True"
-      type: ScalingLimited
-    currentMetrics:
-    - resource:
-        current:
-          averageUtilization: 0
-          averageValue: 1m
-        name: cpu
-      type: Resource
-    currentReplicas: 2
-    desiredReplicas: 2
-    lastScaleTime: "2023-03-06T12:20:12Z"
-kind: List
-metadata:
-  resourceVersion: ""
