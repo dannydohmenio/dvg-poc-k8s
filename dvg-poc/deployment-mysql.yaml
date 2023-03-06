@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  deployment.kubernetes.io/revision: '1'
   labels:
     app: mysql
     app.kubernetes.io/instance: dvg-poc
