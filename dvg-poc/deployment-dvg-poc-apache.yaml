@@ -3,18 +3,14 @@ kind: Deployment
 metadata:
   annotations:
     deployment.kubernetes.io/revision: '1'
-  creationTimestamp: '2023-03-06T10:34:17Z'
-  generation: 9
   labels:
     app: dvg-poc-apache
     app.kubernetes.io/instance: dvg-poc
   name: dvg-poc-apache
   namespace: default
-  resourceVersion: '18423'
-  uid: abbbed97-7f2b-4ea0-a658-11c4705d3e21
 spec:
   progressDeadlineSeconds: 600
-  replicas: 1
+  replicas: 2
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -26,7 +22,6 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: dvg-poc-apache
     spec:
@@ -75,22 +70,3 @@ spec:
             name: dvg-drupal-settings
             optional: false
           name: drupal-settings
-status:
-  availableReplicas: 1
-  conditions:
-    - lastTransitionTime: '2023-03-06T10:34:17Z'
-      lastUpdateTime: '2023-03-06T10:35:28Z'
-      message: ReplicaSet "dvg-poc-apache-866cff8bbc" has successfully progressed.
-      reason: NewReplicaSetAvailable
-      status: 'True'
-      type: Progressing
-    - lastTransitionTime: '2023-03-06T12:01:28Z'
-      lastUpdateTime: '2023-03-06T12:01:28Z'
-      message: Deployment has minimum availability.
-      reason: MinimumReplicasAvailable
-      status: 'True'
-      type: Available
-  observedGeneration: 9
-  readyReplicas: 1
-  replicas: 1
-  updatedReplicas: 1

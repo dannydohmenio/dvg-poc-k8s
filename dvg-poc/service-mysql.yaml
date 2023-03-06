@@ -1,15 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  creationTimestamp: '2023-03-06T10:34:43Z'
+  labels:
+    app.kubernetes.io/instance: dvg-poc
   name: mysql
   namespace: default
-  resourceVersion: '2099'
-  uid: 5089666b-f142-4c75-aa05-7dd7dcfece69
 spec:
-  clusterIP: 172.20.111.166
+  clusterIP: 172.20.139.79
   clusterIPs:
-    - 172.20.111.166
+    - 172.20.139.79
   internalTrafficPolicy: Cluster
   ipFamilies:
     - IPv4
@@ -22,5 +21,3 @@ spec:
     app: mysql
   sessionAffinity: None
   type: ClusterIP
-status:
-  loadBalancer: {}

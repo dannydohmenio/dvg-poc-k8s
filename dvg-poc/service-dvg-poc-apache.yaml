@@ -1,22 +1,21 @@
 apiVersion: v1
 kind: Service
 metadata:
-  creationTimestamp: '2023-03-06T10:35:33Z'
+  labels:
+    app.kubernetes.io/instance: dvg-poc
   name: dvg-poc-apache
   namespace: default
-  resourceVersion: '2270'
-  uid: a6796ebb-b57f-4d2b-a365-b213f90ca9a3
 spec:
-  clusterIP: 172.20.73.222
+  clusterIP: 172.20.150.178
   clusterIPs:
-    - 172.20.73.222
+    - 172.20.150.178
   externalTrafficPolicy: Cluster
   internalTrafficPolicy: Cluster
   ipFamilies:
     - IPv4
   ipFamilyPolicy: SingleStack
   ports:
-    - nodePort: 30074
+    - nodePort: 31418
       port: 80
       protocol: TCP
       targetPort: 80
@@ -24,5 +23,3 @@ spec:
     app: dvg-poc-apache
   sessionAffinity: None
   type: NodePort
-status:
-  loadBalancer: {}
