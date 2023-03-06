@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dvg-poc-apache
+  namespace: default
+spec:
+  clusterIP: 172.20.150.178
+  clusterIPs:
+  - 172.20.150.178
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - nodePort: 31418
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: dvg-poc-apache
+  sessionAffinity: None
+  type: NodePort
