@@ -6,9 +6,6 @@ metadata:
   name: mysql
   namespace: default
 spec:
-  clusterIP: 172.20.111.166
-  clusterIPs:
-    - 172.20.111.166
   internalTrafficPolicy: Cluster
   ipFamilies:
     - IPv4

@@ -6,9 +6,6 @@ metadata:
   name: elasticsearch
   namespace: default
 spec:
-  clusterIP: 172.20.32.81
-  clusterIPs:
-    - 172.20.32.81
   internalTrafficPolicy: Cluster
   ipFamilies:
     - IPv4
