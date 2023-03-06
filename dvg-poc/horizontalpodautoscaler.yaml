@@ -8,12 +8,10 @@ metadata:
       recommendation","reason":"ScaleDownStabilized","status":"True","type":"AbleToScale"},{"lastTransitionTime":"2023-03-06T10:35:54Z","message":"the
       desired replica count is less than the minimum replica
       count","reason":"TooFewReplicas","status":"True","type":"ScalingLimited"}],"currentMetrics":[{"resource":{"current":{"averageUtilization":0,"averageValue":"1m"},"name":"cpu"},"type":"Resource"}],"currentReplicas":2,"desiredReplicas":2,"lastScaleTime":"2023-03-06T12:20:12Z"}}
-  creationTimestamp: '2023-03-06T10:33:54Z'
   labels:
     app.kubernetes.io/instance: dvg-poc
   name: autoscaler
   namespace: default
-  uid: b791f286-d4ab-4711-a0ca-257c17d8b282
 spec:
   behavior:
     scaleDown:
@@ -38,7 +36,7 @@ spec:
           averageUtilization: 400
           type: Utilization
       type: Resource
-  minReplicas: 2
+  minReplicas: 1
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
@@ -69,6 +67,6 @@ status:
           averageValue: 1m
         name: cpu
       type: Resource
-  currentReplicas: 2
-  desiredReplicas: 2
+  currentReplicas: 1
+  desiredReplicas: 1
   lastScaleTime: '2023-03-06T12:20:12Z'

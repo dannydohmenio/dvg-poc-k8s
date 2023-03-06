@@ -14,12 +14,9 @@ metadata:
     nginx.ingress.kubernetes.io/satisfy: any
     nginx.ingress.kubernetes.io/ssl-passthrough: "true"
     nginx.ingress.kubernetes.io/whitelist-source-range: 83.217.69.230/24
-  creationTimestamp: "2023-03-06T10:33:54Z"
   generation: 1
   name: dvg-poc-ingress
   namespace: default
-  resourceVersion: "1869"
-  uid: 709d7436-a8fc-41b1-8fce-93997d63604b
 spec:
   ingressClassName: nginx
   rules:
