@@ -16,7 +16,6 @@ metadata:
     app.kubernetes.io/instance: dvg-poc
   name: autoscaler
   namespace: default
-  resourceVersion: '22892'
   uid: b791f286-d4ab-4711-a0ca-257c17d8b282
 spec:
   behavior:
